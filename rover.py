@@ -60,5 +60,12 @@ class Rover:
                     # Working on Y axis
                     self.y = self.y - 1 * self.multiplier
 
-            else:
-                pass
+            elif command == 'R':
+                # Rotate right
+                new_index = (self.compass_index + 1) % 4
+                self.direction = self.compass[new_index]
+
+            elif command == 'L':
+                # Rotate left
+                new_index = (self.compass_index - 1) % 4
+                self.direction = self.compass[new_index]
