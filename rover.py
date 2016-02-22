@@ -22,6 +22,15 @@ class Rover:
         # 1 if pointing along y axis
         return (self.compass_index + 1) % 2
 
+    @property
+    def multiplier(self):
+        # 1 if pointing N or E
+        # -1 if pointing S or W
+        if self.compass_index <= 1:
+            return 1
+        else:
+            return -1
+
     def set_position(self, x=None, y=None, direction=None):
           if x is not None:
               self.x = x
