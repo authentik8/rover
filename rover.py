@@ -16,7 +16,13 @@ class Rover:
         return next(i for i in range(0, len(self.compass)) if self.compass[i] == self.direction)
 
 
-    def set_position(self, x, y, direction):
+    @property
+    def axis(self):
+        # 0 if pointing along x axis
+        # 1 if pointing along y axis
+        return (self.compass_index + 1) % 2
+
+    def set_position(self, x=self.x, y=self.y, direction=self.direction):
         self.x = x
         self.y = y
         self.direction = direction
