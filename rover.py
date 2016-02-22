@@ -45,8 +45,11 @@ class Rover:
         for command in args:
             if command == 'F':
                 # Move forward command
-                if self.compass_index < 2:
-                    # Upper right quadrant, increasing x/y
-                    pass
+                if self.axis == 0:
+                    # Working on X axis
+                    self.x = self.x + 1 * self.multiplier
+                else:
+                    # Working on Y axis
+                    self.y = self.y + 1 * self.multiplier
             else:
                 pass
