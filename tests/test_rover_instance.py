@@ -81,6 +81,28 @@ def test_forwards_movement():
         yield move_and_check_position, initial_coordinates, initial_direction, 'F', offset
 
 
+def test_forwards_boundary_movement():
+    outer_bounds = [
+        (0, 49),
+        (49, 0),
+        (0, 0),
+        (0, 0)
+    ]
+
+    offset_list = [
+        (0, -49),
+        (-49, 0),
+        (0, 49),
+        (49, 0)
+    ]
+
+    for i in range(0, len(compass_headings)):
+        initial_coordinates = outer_bounds[i]
+        initial_direction = compass_headings[i]
+        offset = offset_list[i]
+        yield move_and_check_position, initial_coordinates, initial_direction, 'F', offset
+
+
 def test_backwards_movement():
     coordinate_list = [
         (0, 1),
