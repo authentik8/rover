@@ -10,3 +10,8 @@ class Rover:
     @property
     def position(self):
         return self.x, self.y, self.direction
+
+    def set_position(self, x, y, direction):
+        self.x = x
+        self.y = y
+        self.direction = direction
