@@ -51,5 +51,14 @@ class Rover:
                 else:
                     # Working on Y axis
                     self.y = self.y + 1 * self.multiplier
+            elif command == 'B':
+                # Move backwards command
+                if self.axis == 0:
+                    # Working on X axis
+                    self.x = self.x - 1 * self.multiplier
+                else:
+                    # Working on Y axis
+                    self.y = self.y - 1 * self.multiplier
+
             else:
                 pass
