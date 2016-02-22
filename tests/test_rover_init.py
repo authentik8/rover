@@ -11,3 +11,25 @@ def test_rover_init_with_custom_paramaters():
     assert rover.x == 3
     assert rover.y == 7
     assert rover.direction == 'W'
+
+
+def test_rover_Init_custom_grid():
+    from rover import Rover
+    rover = Rover(grid_x=100, grid_y=150)
+    assert rover.x == 0
+    assert rover.y == 0
+    assert rover.direction == 'N'
+
+    assert rover.grid_x == 100
+    assert rover.grid_y == 150
+
+
+def test_rover_init_full_custom_grid():
+    from rover import Rover
+    rover = Rover(5, 9, 'E', 100, 150)
+    assert rover.x == 5
+    assert rover.y == 9
+    assert rover.direction == 'E'
+
+    assert rover.grid_x == 100
+    assert rover.grid_y == 150

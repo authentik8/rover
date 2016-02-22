@@ -42,6 +42,7 @@ class TestRover(TestCase):
                 assert self.rover.multiplier == -1
 
 
+
 def move_and_check_position(initial_coordinates, initial_direction, command, offset):
     rover = Rover(*initial_coordinates, direction=initial_direction)
 
