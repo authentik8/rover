@@ -5,7 +5,7 @@ def test_rover_init_with_default_parameters():
     assert rover.y == 0
     assert rover.direction == 'N'
 
-def test_rover_init_with_custom_paramaters():
+def test_rover_init_with_custom_parameters():
     from rover import Rover
     rover = Rover(3, 7, 'W')
     assert rover.x == 3
@@ -13,7 +13,7 @@ def test_rover_init_with_custom_paramaters():
     assert rover.direction == 'W'
 
 
-def test_rover_Init_custom_grid():
+def test_rover_init_custom_grid():
     from rover import Rover
     rover = Rover(grid_x=100, grid_y=150)
     assert rover.x == 0
