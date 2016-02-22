@@ -47,16 +47,18 @@ def move_and_check_position(initial_coordinates, initial_direction, command, off
     rover = Rover(*initial_coordinates, direction=initial_direction)
 
     rover.move(command)
-    assert rover.position == (initial_coordinates[0] + offset[0],
-                                   initial_coordinates[1] + offset[1],
-                                   initial_direction)
+    assert rover.position == (initial_coordinates[0] + offset[0],  # x
+                              initial_coordinates[1] + offset[1],  # y
+                              initial_direction)                   # direction
 
 
 def rotate_and_check_position(initial_coordinates, initial_direction, command, new_direction):
     rover = Rover(*initial_coordinates, direction=initial_direction)
 
     rover.move(command)
-    assert rover.position == (initial_coordinates[0], initial_coordinates[1], new_direction)
+    assert rover.position == (initial_coordinates[0],   # x
+                              initial_coordinates[1],   # y
+                              new_direction)            # direction
 
 
 def test_forwards_movement():
