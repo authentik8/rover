@@ -32,6 +32,14 @@ class TestRover(TestCase):
             else:
                 assert self.rover.axis == 1
 
+    def test_rover_multiplier(self):
+        for i in range(0, len(self.compass_headings)):
+            self.rover.direction = self.compass_headings[i]
+            if self.rover.direction in ['N', 'E']:
+                assert self.rover.multiplier == 1
+            else:
+                assert self.rover.multiplier == -1
+
     def test_rover_move_forward_north(self):
         self.rover.set_position(0, 0, 'N')
         self.rover.move('F')
