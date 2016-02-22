@@ -6,3 +6,7 @@ class Rover:
         self.x = x
         self.y = y
         self.direction = direction
+
+    @property
+    def position(self):
+        return self.x, self.y, self.direction
