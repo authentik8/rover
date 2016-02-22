@@ -86,3 +86,29 @@ def test_backwards_movement():
         initial_direction = compass_headings[i]
         offset = offset_list[i]
         yield move_and_check_position, initial_coordinates, initial_direction, 'B', offset
+
+def rotate_and_check_position(initial_coordinates, initial_direction, command, new_direction):
+    rover = Rover(*initial_coordinates, direction=initial_direction)
+
+    rover.move(command)
+    assert rover.position == (initial_coordinates[0], initial_coordinates[1], new_direction)
+
+def test_clockwise_rotation():
+    rotations = [
+        ('N', 'E'),
+        ('E', 'S'),
+        ('S', 'W'),
+        ('W', 'N')
+    ]
+    for rotation in rotations:
+        yield rotate_and_check_position, (0, 0), rotation[0], 'R', rotation[1]
+
+def test_anticlockwise_rotation():
+    rotations = [
+        ('N', 'W'),
+        ('W', 'S'),
+        ('S', 'E'),
+        ('E', 'N')
+    ]
+    for rotation in rotations:
+        yield rotate_and_check_position, (0, 0), rotation[0], 'L', rotation[1]
