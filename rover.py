@@ -15,3 +15,11 @@ class Rover:
         self.x = x
         self.y = y
         self.direction = direction
+
+    def move(*args):
+        for command in args:
+            if command == 'F':
+                # Move forward command
+                pass
+            else:
+                pass

@@ -4,11 +4,13 @@ from rover import Rover
 
 class TestRover(TestCase):
 
+    compass_headings = ['N', 'E', 'S', 'W']
+
     def setUp(self):
         self.rover = Rover()
 
     def test_rover_compass(self):
-        assert self.rover.compass == ['N', 'E', 'S', 'W']
+        assert self.rover.compass == self.compass_headings
 
     def test_rover_position(self):
         assert self.rover.position == (self.rover.x, self.rover.y, self.rover.direction)
@@ -16,6 +18,11 @@ class TestRover(TestCase):
     def test_rover_set_position(self):
         self.rover.set_position(4, 9, 'W')
         assert self.rover.position == (4, 9, 'W')
+
+    def test_rover_compass_index(self):
+        for i in range(0, len(self.compass_headings)):
+            self.rover.direction = self.compass_headings[i]
+            assert self.rover.compass_index == i
 
     def test_rover_move_forward_north(self):
         self.rover.set_position(0, 0, 'N')
