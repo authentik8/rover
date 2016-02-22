@@ -44,8 +44,8 @@ class Rover:
           if direction is not None:
               self.direction = direction
 
-    def move(self, *args):
-        for command in args:
+    def move(self, command_string):
+        for command in command_string:
             if command == 'F':
                 # Move forward command
                 if self.axis == 0:
