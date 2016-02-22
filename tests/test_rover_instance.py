@@ -1,16 +1,17 @@
+from nose.tools import with_setup
 
 from unittest import TestCase
 from rover import Rover
 
-class TestRover(TestCase):
+compass_headings = ['N', 'E', 'S', 'W']
 
-    compass_headings = ['N', 'E', 'S', 'W']
+class TestRover(TestCase):
 
     def setUp(self):
         self.rover = Rover()
 
     def test_rover_compass(self):
-        assert self.rover.compass == self.compass_headings
+        assert self.rover.compass == compass_headings
 
     def test_rover_position(self):
         assert self.rover.position == (self.rover.x, self.rover.y, self.rover.direction)
@@ -20,63 +21,68 @@ class TestRover(TestCase):
         assert self.rover.position == (4, 9, 'W')
 
     def test_rover_compass_index(self):
-        for i in range(0, len(self.compass_headings)):
-            self.rover.direction = self.compass_headings[i]
+        for i in range(0, len(compass_headings)):
+            self.rover.direction = compass_headings[i]
             assert self.rover.compass_index == i
 
     def test_rover_axis(self):
-        for i in range(0, len(self.compass_headings)):
-            self.rover.direction = self.compass_headings[i]
+        for i in range(0, len(compass_headings)):
+            self.rover.direction = compass_headings[i]
             if self.rover.direction in ['E', 'W']:
                 assert self.rover.axis == 0
             else:
                 assert self.rover.axis == 1
 
     def test_rover_multiplier(self):
-        for i in range(0, len(self.compass_headings)):
-            self.rover.direction = self.compass_headings[i]
+        for i in range(0, len(compass_headings)):
+            self.rover.direction = compass_headings[i]
             if self.rover.direction in ['N', 'E']:
                 assert self.rover.multiplier == 1
             else:
                 assert self.rover.multiplier == -1
 
-    def test_rover_move_forward_north(self):
-        self.rover.set_position(0, 0, 'N')
-        self.rover.move('F')
-        assert self.rover.position == (0, 1, 'N')
+def move_and_check_position(initial_coordinates, initial_direction, command, offset):
+    rover = Rover(*initial_coordinates, direction=initial_direction)
 
-    def test_rover_move_forward_south(self):
-        self.rover.set_position(0, 1, 'S')
-        self.rover.move('F')
-        assert self.rover.position == (0, 0, 'S')
+    rover.move(command)
+    assert rover.position == (initial_coordinates[0] + offset[0],
+                                   initial_coordinates[1] + offset[1],
+                                   initial_direction)
 
-    def test_rover_move_forward_east(self):
-        self.rover.set_position(0, 0, 'E')
-        self.rover.move('F')
-        assert self.rover.position == (1, 0, 'E')
+def test_forwards_movement():
+    coordinate_list = [
+        (0, 0),
+        (0, 0),
+        (0, 1),
+        (1, 0)
+    ]
+    offset_list = [
+        (0, 1),
+        (1, 0),
+        (0, -1),
+        (-1, 0)
+    ]
+    for i in range(0, len(compass_headings)):
+        initial_coordinates = coordinate_list[i]
+        initial_direction = compass_headings[i]
+        offset = offset_list[i]
+        yield move_and_check_position, initial_coordinates, initial_direction, 'F', offset
 
-    def test_rover_move_forward_west(self):
-        self.rover.set_position(1, 0, 'W')
-        self.rover.move('F')
-        assert self.rover.position == (0, 0, 'W')
-
-    # Backwards tests
-    def test_rover_move_backward_north(self):
-        self.rover.set_position(0, 1, 'N')
-        self.rover.move('B')
-        assert self.rover.position == (0, 0, 'N')
-
-    def test_rover_move_backward_south(self):
-        self.rover.set_position(0, 0, 'S')
-        self.rover.move('B')
-        assert self.rover.position == (0, 1, 'S')
-
-    def test_rover_move_backward_east(self):
-        self.rover.set_position(1, 0, 'E')
-        self.rover.move('B')
-        assert self.rover.position == (0, 0, 'E')
-
-    def test_rover_move_backward_west(self):
-        self.rover.set_position(0, 0, 'W')
-        self.rover.move('B')
-        assert self.rover.position == (1, 0, 'W')
+def test_backwards_movement():
+    coordinate_list = [
+        (0, 1),
+        (1, 0),
+        (0, 0),
+        (0, 0)
+    ]
+    offset_list = [
+        (0, -1),
+        (-1, 0),
+        (0, 1),
+        (1, 0)
+    ]
+    for i in range(0, len(compass_headings)):
+        initial_coordinates = coordinate_list[i]
+        initial_direction = compass_headings[i]
+        offset = offset_list[i]
+        yield move_and_check_position, initial_coordinates, initial_direction, 'B', offset
