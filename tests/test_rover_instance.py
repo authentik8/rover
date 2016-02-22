@@ -59,3 +59,24 @@ class TestRover(TestCase):
         self.rover.set_position(1, 0, 'W')
         self.rover.move('F')
         assert self.rover.position == (0, 0, 'W')
+
+    # Backwards tests
+    def test_rover_move_backward_north(self):
+        self.rover.set_position(0, 1, 'N')
+        self.rover.move('B')
+        assert self.rover.position == (0, 0, 'N')
+
+    def test_rover_move_backward_south(self):
+        self.rover.set_position(0, 0, 'S')
+        self.rover.move('B')
+        assert self.rover.position == (0, 1, 'S')
+
+    def test_rover_move_backward_east(self):
+        self.rover.set_position(1, 0, 'E')
+        self.rover.move('B')
+        assert self.rover.position == (0, 0, 'E')
+
+    def test_rover_move_backward_west(self):
+        self.rover.set_position(0, 0, 'W')
+        self.rover.move('B')
+        assert self.rover.position == (1, 0, 'W')
