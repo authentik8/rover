@@ -22,15 +22,22 @@ class Rover:
         # 1 if pointing along y axis
         return (self.compass_index + 1) % 2
 
-    def set_position(self, x=self.x, y=self.y, direction=self.direction):
-        self.x = x
-        self.y = y
-        self.direction = direction
+    def set_position(self, x=None, y=None, direction=None):
+          if x is not None:
+              self.x = x
 
-    def move(*args):
+          if y is not None:
+              self.y = y
+
+          if direction is not None:
+              self.direction = direction
+
+    def move(self, *args):
         for command in args:
             if command == 'F':
                 # Move forward command
-                pass
+                if self.compass_index < 2:
+                    # Upper right quadrant, increasing x/y
+                    pass
             else:
                 pass
