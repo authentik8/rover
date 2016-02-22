@@ -12,3 +12,7 @@ class TestRover(TestCase):
 
     def test_rover_position(self):
         assert self.rover.position == (self.rover.x, self.rover.y, self.rover.direction)
+
+    def test_rover_set_position(self):
+        self.rover.set_position(4, 9, 'W')
+        assert self.rover.position == (4, 9, 'W')
