@@ -41,6 +41,7 @@ class TestRover(TestCase):
             else:
                 assert self.rover.multiplier == -1
 
+
 def move_and_check_position(initial_coordinates, initial_direction, command, offset):
     rover = Rover(*initial_coordinates, direction=initial_direction)
 
@@ -48,6 +49,14 @@ def move_and_check_position(initial_coordinates, initial_direction, command, off
     assert rover.position == (initial_coordinates[0] + offset[0],
                                    initial_coordinates[1] + offset[1],
                                    initial_direction)
+
+
+def rotate_and_check_position(initial_coordinates, initial_direction, command, new_direction):
+    rover = Rover(*initial_coordinates, direction=initial_direction)
+
+    rover.move(command)
+    assert rover.position == (initial_coordinates[0], initial_coordinates[1], new_direction)
+
 
 def test_forwards_movement():
     coordinate_list = [
@@ -68,6 +77,7 @@ def test_forwards_movement():
         offset = offset_list[i]
         yield move_and_check_position, initial_coordinates, initial_direction, 'F', offset
 
+
 def test_backwards_movement():
     coordinate_list = [
         (0, 1),
@@ -87,11 +97,6 @@ def test_backwards_movement():
         offset = offset_list[i]
         yield move_and_check_position, initial_coordinates, initial_direction, 'B', offset
 
-def rotate_and_check_position(initial_coordinates, initial_direction, command, new_direction):
-    rover = Rover(*initial_coordinates, direction=initial_direction)
-
-    rover.move(command)
-    assert rover.position == (initial_coordinates[0], initial_coordinates[1], new_direction)
 
 def test_clockwise_rotation():
     rotations = [
