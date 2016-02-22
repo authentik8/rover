@@ -2,10 +2,13 @@ class Rover:
 
     compass = ['N', 'E', 'S', 'W']
 
-    def __init__(self, x=0, y=0, direction='N'):
+    def __init__(self, x=0, y=0, direction='N', grid_x=50, grid_y=50):
         self.x = x
         self.y = y
         self.direction = direction
+
+        self.grid_x = grid_x
+        self.grid_y = grid_y
 
     @property
     def position(self):
