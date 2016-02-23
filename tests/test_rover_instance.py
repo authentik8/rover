@@ -1,5 +1,7 @@
 from nose.tools import with_setup
 
+from io import StringIO
+
 from unittest import TestCase
 from rover import Rover
 
@@ -59,13 +61,16 @@ class TestRover(TestCase):
 
     def test_collision_detection(self):
         self.rover.obstacles = [(1, 2)]
-        self.rover.move('FFRFFF') # Move us to (3, 2) if no obstacles encountered
+
+        out = StringIO()
+
+        self.rover.move('FFRFFF', out=out) # Move us to (3, 2) if no obstacles encountered
 
         # Check we printed the location correctly
+        output = out.getvalue().strip()
+        assert output == 'Obstacle encountered while attempting to move to (1, 2) from (0, 2)'
 
         assert self.rover.position == (0, 2, 'E')
-
-
 
 
 def move_and_check_position(initial_coordinates, initial_direction, command, offset):
