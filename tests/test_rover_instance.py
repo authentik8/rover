@@ -57,6 +57,16 @@ class TestRover(TestCase):
         self.rover.move('FFRFFRBBLF')
         assert self.rover.position == (3, 4, 'E')
 
+    def test_collision_detection(self):
+        self.rover.obstacles = [(1, 2)]
+        self.rover.move('FFRFFF') # Move us to (3, 2) if no obstacles encountered
+
+        # Check we printed the location correctly
+
+        assert self.rover.position == (0, 2, 'E')
+
+
+
 
 def move_and_check_position(initial_coordinates, initial_direction, command, offset):
     rover = Rover(*initial_coordinates, direction=initial_direction)
