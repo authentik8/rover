@@ -49,6 +49,13 @@ class Rover:
           if direction is not None:
               self.direction = direction
 
+    def obstacle_at_position(self, x, y):
+        for obstacle in self.obstacles:
+            if obstacle[0] == x and obstacle[1] == y:
+                return True
+
+        return False
+
     def move(self, command_string):
         for command in command_string:
             if command == 'F':
