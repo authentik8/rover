@@ -41,6 +41,18 @@ class TestRover(TestCase):
             else:
                 assert self.rover.multiplier == -1
 
+    def test_obstacle_at_position(self):
+        self.rover.obstacles = [(1, 1),]
+
+        # Check the obstacle is identified
+        assert self.rover.obstacle_at_position(1, 1) == True
+
+        # Check the obstacle is not identified while in the same row or column
+        assert self.rover.obstacle_at_position(0, 0) == False
+        assert self.rover.obstacle_at_position(0, 1) == False
+        assert self.rover.obstacle_at_position(1, 0) == False
+
+
 
 
 def move_and_check_position(initial_coordinates, initial_direction, command, offset):
