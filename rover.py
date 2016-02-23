@@ -1,3 +1,5 @@
+import sys
+
 class Rover:
 
     compass = ['N', 'E', 'S', 'W']
@@ -56,7 +58,7 @@ class Rover:
 
         return False
 
-    def move(self, command_string):
+    def move(self, command_string, out=sys.stdout):
         for command in command_string:
 
             new_x = self.x
@@ -93,11 +95,11 @@ class Rover:
                 self.x = new_x
                 self.y = new_y
             else:
-                print("Obstacle encountered while attempting to move to "
-                      "({new_x}, {new_y}) from ({x}, {y})".format(
-                        new_x=new_x,
-                        new_y=new_y,
-                        x=self.x,
-                        y=self.y
-                      ))
+                out.write(
+                    "Obstacle encountered while attempting to move to "
+                    "({new_x}, {new_y}) from ({x}, {y})".format(new_x=new_x,
+                                                                new_y=new_y,
+                                                                x=self.x,
+                                                                y=self.y)
+                )
                 break
