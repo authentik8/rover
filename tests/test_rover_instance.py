@@ -53,6 +53,9 @@ class TestRover(TestCase):
         assert self.rover.obstacle_at_position(1, 0) == False
 
 
+    def test_compound_movement(self):
+        self.rover.move('FFRFFRBBLF')
+        assert self.rover.position == (3, 4, 'E')
 
 
 def move_and_check_position(initial_coordinates, initial_direction, command, offset):
