@@ -2,13 +2,18 @@ class Rover:
 
     compass = ['N', 'E', 'S', 'W']
 
-    def __init__(self, x=0, y=0, direction='N', grid_x=50, grid_y=50):
+    def __init__(self, x=0, y=0, direction='N', grid_x=50, grid_y=50, obstacles=None):
         self.x = x
         self.y = y
         self.direction = direction
 
         self.grid_x = grid_x
         self.grid_y = grid_y
+
+        if obstacles is None:
+            obstacles = []
+
+        self.obstacles = obstacles
 
     @property
     def position(self):
