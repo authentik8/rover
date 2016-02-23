@@ -58,22 +58,26 @@ class Rover:
 
     def move(self, command_string):
         for command in command_string:
+
+            new_x = self.x
+            new_y = self.y
+
             if command == 'F':
                 # Move forward command
                 if self.axis == 0:
                     # Working on X axis
-                    self.x = (self.x + 1 * self.multiplier) % self.grid_x
+                    new_x = (self.x + 1 * self.multiplier) % self.grid_x
                 else:
                     # Working on Y axis
-                    self.y = (self.y + 1 * self.multiplier) % self.grid_y
+                    new_y = (self.y + 1 * self.multiplier) % self.grid_y
             elif command == 'B':
                 # Move backwards command
                 if self.axis == 0:
                     # Working on X axis
-                    self.x = (self.x - 1 * self.multiplier) % self.grid_x
+                    new_x = (self.x - 1 * self.multiplier) % self.grid_x
                 else:
                     # Working on Y axis
-                    self.y = (self.y - 1 * self.multiplier) % self.grid_y
+                    new_y = (self.y - 1 * self.multiplier) % self.grid_y
 
             elif command == 'R':
                 # Rotate right
@@ -84,3 +88,16 @@ class Rover:
                 # Rotate left
                 new_index = (self.compass_index - 1) % 4
                 self.direction = self.compass[new_index]
+
+            if not self.obstacle_at_position(new_x, new_y):
+                self.x = new_x
+                self.y = new_y
+            else:
+                print("Obstacle encountered while attempting to move to "
+                      "({new_x}, {new_y}) from ({x}, {y})".format(
+                        new_x=new_x,
+                        new_y=new_y,
+                        x=self.x,
+                        y=self.y
+                      ))
+                break
