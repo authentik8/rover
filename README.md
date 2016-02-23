@@ -1,4 +1,7 @@
 # Rover
+
+![](https://travis-ci.org/authentik8/rover.svg?branch=master)
+
 Mini-project demonstrating test-driven development
 
 # Deployment
